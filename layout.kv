@@ -1,0 +1,186 @@
+# ---------- game.kv  ---------- #
+
+# ---------- custom elements  ---------- #
+
+<SettingsLabel@Label>:
+    font_size: 25
+    color: 0, 0, 0, 1
+
+<MenuLabel@Label>:
+    font_size: 25
+    color: 1, 1, 1, 1
+    bold: True
+
+<CustButton@Button>:
+    font_size: 25
+    bold: True
+    background_normal: ''
+    background_down: ''
+
+<CustSpinner@Spinner>:
+    font_size: 25
+    background_color: .4, .58, .93, 1
+    size_hint: .5, .5
+    pos_hint: {'y': .3}
+    background_normal: ''
+    background_down: ''
+
+# ---------- custom classes  ---------- #
+
+<Cell>
+    background_normal: ''
+    background_down: ''
+
+
+<GameBoard>:
+    padding: 5
+    spacing: 2
+    canvas.before:
+        Color:
+            rgba: .4, .4, .4, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<GameLayout>:
+    id: layout
+    board: gameboard
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    GridLayout:
+        rows: 3
+        start: start
+
+        BoxLayout:
+            size_hint: .1, .1
+            padding: 5
+
+            #-- game logo --#
+            Label:
+                canvas:
+                    Color:
+                        rgb: (1, 1, 1)
+                    Rectangle:
+                        size: self.width - 920, self.height
+                        pos: self.x + 460, self.y
+                        source: 'images/logo.png'
+
+        BoxLayout:
+            size_hint: .05, .05
+
+            #-- step counter --#
+            MenuLabel:
+                canvas.before:
+                    Color:
+                        rgb: (.4, .4, .4)
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                text: "Step {step}".format(step=gameboard.step)
+
+            #-- start button --#
+            CustButton:
+                id: start
+                text: "Start"
+                on_press: root.start()
+                background_color: .23, .7, .44, 1
+
+            #-- pause button --#
+            CustButton:
+                text: "Pause"
+                on_press: root.pause()
+                background_color: 1, .54, 0, 1
+
+            #-- clear button --#
+            CustButton:
+                text: "Clear"
+                on_press: root.clear()
+                background_color: .7, .13, .13, 1
+
+            #-- settings button --#
+            CustButton:
+                text: "Settings"
+                on_press:
+                    root.pause(start=False)
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'settings'
+                background_color: .4, .58, .93, 1
+
+        GameBoard:
+            size_hint: .8, .8
+            id: gameboard
+
+
+<SettingsScreen>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    BoxLayout:
+        orientation: "vertical"
+        padding: 10
+
+        #-- settings logo -- #
+        Label:
+            canvas:
+                Color:
+                    rgb: (1, 1, 1)
+                Rectangle:
+                    size: self.width - 900, self.height - 80
+                    pos: self.x + 460, self.y + 30
+                    source: 'images/settings.png'
+
+        #-- framerate slider -- #
+        BoxLayout:
+            orientation: "horizontal"
+            SettingsLabel:
+                text: "Speed x{speed}".format(speed=str(slider.value))
+            Slider:
+                id: slider
+                min: 1
+                max: 10
+                value: 1
+                step: 1
+                on_value: root.change_framerate(slider.value)
+
+        #-- gameboard zoom slider -- #
+        BoxLayout:
+            orientation: "horizontal"
+            SettingsLabel:
+                text: "Zoom {speed}%".format(speed=str(slider2.value))
+            Slider:
+                id: slider2
+                min: 0
+                max: 100
+                value: 0
+                step: 10
+
+        #-- patterns spinner -- #
+        BoxLayout:
+            orientation: "horizontal"
+            pos_hint: {'x': -.08, 'center_y': .5}
+            SettingsLabel:
+                text: "Choose Pattern"
+            CustSpinner:
+                text: "Empty"
+                values: ["1beacon", "glider", "ghostherschel", "4boats", "star"]
+                id: spinner_id
+                on_text: root.upload_pattern(spinner_id.text)
+
+        #-- back to game slider -- #
+        CustButton:
+            text: 'Back to Game'
+            background_color: .4, .58, .93, 1
+            on_press:
+                root.zoom(slider2.value)
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'game'

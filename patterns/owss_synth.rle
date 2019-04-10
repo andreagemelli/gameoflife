@@ -1,0 +1,13 @@
+#N owss_synth.rle
+#C http://conwaylife.com/wiki/Overweight_spaceship
+#C http://www.conwaylife.com/patterns/owss_synth.rle
+59bo45bo$58bo47bo$58b3o43b3o$56bo57bo$57bo54b2o$55b3o24b2o24b2o3b2o23b
+4o$82b2o24b2o27bo3bo$141bo$137bo2bo$102bo33bo$o99bobo31bo5bo$b2ob2o22b
+o25bo25bo20b2o3bo34bo$2o2bobo20bobo23bobo23bobo23bobo2b2o22bo6bo$4bo
+23b2o24b2o24b2o24b2ob2o24b7o$111bo$104b2o$103bobo$105bo32b4o$83b2o24b
+2o26bo3bo$56b3o24b2o24b2o4bo25bo$58bo55b2o21bo2bo$57bo56bobo$59b3o43b
+2o$59bo44bobo$60bo45bo26$25bo$23bobo$24b2o7bo$32bo4bobo$32b3o2b2o$30bo
+7bo$31bo24bo2bo$29b3o28bo$21bo34bo3bo$22bo34b4o$20b3o2$26bo$27b2ob2o
+22b7o$26b2o2bobo20bo6bo$30bo29bo$35bo17bo5bo$34b2o19bo$34bobo19bo2bo$
+60bo$23b3o30bo3bo$25bo4b3o24b4o$24bo7bo$31bo$33b3o3b2o$33bo4b2o$34bo5b
+o$24b3o$26bo$25bo!

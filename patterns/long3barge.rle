@@ -1,0 +1,5 @@
+#N long3barge.rle
+#C http://conwaylife.com/wiki/Long%5E3_barge
+#C http://www.conwaylife.com/patterns/long3barge.rle
+x = 7, y = 7, rule = B3/S23
+5bo$4bobo$3bobo$2bobo$bobo$obo$bo!
